@@ -1,7 +1,5 @@
-import sys 
-import os
-import yaml
 import flask
+import yaml
 
 app = flask.Flask(__name__)
 
@@ -12,8 +10,10 @@ def index():
     url = flask.request.args.get("url")
     return fetch_website(version, url)
 
-        
+
 CONFIG = {"API_KEY": "771df488714111d39138eb60df756e6b"}
+
+
 class Person(object):
     def __init__(self, name):
         self.name = name
@@ -27,8 +27,8 @@ def fetch_website(urllib_version, url):
     # Import the requested version (2 or 3) of urllib
     import urllib3 as urllib
     # Fetch and print the requested URL
- 
-    try: 
+
+    try:
         http = urllib.PoolManager()
         r = http.request('GET', url)
     except Exception:
@@ -37,9 +37,10 @@ def fetch_website(urllib_version, url):
 
 def load_yaml(filename):
     stream = open(filename)
-    deserialized_data = yaml.load(stream, Loader=yaml.Loader) #deserializing data
+    deserialized_data = yaml.load(
+        stream, Loader=yaml.Loader)  # deserializing data
     return deserialized_data
-    
+
 
 def authenticate(password):
     # Assert that the password is correct
@@ -49,13 +50,14 @@ def authenticate(password):
 
 if __name__ == '__main__':
     print("Vulnerabilities:")
-    print("1. Format string vulnerability: use string={person.__init__.__globals__[CONFIG][API_KEY]}")
+    print(
+        "1. Format string vulnerability: use string={person.__init__.__globals__[CONFIG][API_KEY]}")
     print("2. Code injection vulnerability: use string=;print('Own code executed') #")
     print("3. Yaml deserialization vulnerability: use string=file.yaml")
     print("4. Use of assert statements vulnerability: run program with -O argument")
-    choice  = input("Select vulnerability: ")
-    if choice == "1": 
-        new_person = Person("Vickie")  
+    choice = input("Select vulnerability: ")
+    if choice == "1":
+        new_person = Person("Vickie")
         print_nametag(input("Please format your nametag: "), new_person)
     elif choice == "2":
         urlib_version = input("Choose version of urllib: ")
