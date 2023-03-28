@@ -1,2 +1,2 @@
 # pv080-seminar-07
-I hecking love crypto
+Oh, this is cryptoGRAPHY not cryptoCURRENCY
